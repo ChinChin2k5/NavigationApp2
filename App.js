@@ -77,7 +77,6 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.nameText}>Christie Doe</Text>
           </View>
           <View style={styles.avatarBorder}>
-             {/* Lưu ý: Đảm bảo đường dẫn ảnh này tồn tại, không thì thay bằng ảnh URL */}
              <Image source={require('./assets/Mask Group.png')} style={styles.avatar} />
           </View>
         </View>
@@ -116,19 +115,16 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
-        {/* ================= THÊM MỚI PHẦN EXPLORE MORE ================= */}
         <View style={styles.exploreHeader}>
           <Text style={styles.exploreTitle}>Explore More</Text>
           <Ionicons name="arrow-forward-outline" size={24} color="#333" />
         </View>
         
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.exploreScroll}>
-          {/* Nhớ chèn ảnh thật của em vào source nhé, Đại ca đang dùng ảnh mạng làm mẫu */}
           <Image source={{uri: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=300'}} style={styles.exploreCard} />
           <Image source={{uri: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300'}} style={styles.exploreCard} />
           <Image source={{uri: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300'}} style={styles.exploreCard} />
         </ScrollView>
-        {/* ================= KẾT THÚC THÊM MỚI ================= */}
 
       </ScrollView>
     </SafeAreaView>
@@ -138,21 +134,18 @@ const HomeScreen = ({ navigation }) => {
 const ScanScreen = ({ navigation }) => {
   return (
     <View style={styles.scanContainer}>
-      {/* Ảnh nền phủ kín màn hình */}
       <Image 
         source={require('./assets/Juice.jpg')} 
         style={styles.bottleBackground}
         resizeMode="cover"
       />
 
-      {/* Nút Back góc trái trên */}
       <SafeAreaView style={styles.backButtonSafeArea}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Ionicons name="chevron-back" size={24} color="#60A5FA" />
         </TouchableOpacity>
       </SafeAreaView>
 
-      {/* Khung quét mã giữa màn hình */}
       <View style={styles.scannerFrame}>
          <View style={[styles.corner, styles.topLeft]} />
          <View style={[styles.corner, styles.topRight]} />
@@ -160,14 +153,12 @@ const ScanScreen = ({ navigation }) => {
          <View style={[styles.corner, styles.bottomRight]} />
       </View>
 
-      {/* Card thông tin dưới đáy */}
       <View style={styles.bottomCardContainer}>
         <View style={styles.bottomCard}>
           <View style={styles.cardInfo}>
-            {/* Cục lót nền cho ảnh sản phẩm nhỏ */}
             <View style={styles.cardImageWrapper}>
               <Image 
-                source={require('./assets/Juice.jpg')} // Thay đường dẫn ảnh của em vào đây
+                source={require('./assets/Juice.jpg')} 
                 style={styles.cardImage} 
                 resizeMode="contain"
               />
@@ -294,12 +285,10 @@ const PaymentScreen = ({ navigation }) => {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Image 
                     source={require('./assets/Master Card Logo.png')} 
-                    // Logo thẻ thường hình chữ nhật nên Đại ca để width to hơn height xíu
                     style={{width: 36, height: 24, marginRight: 10}} 
                     resizeMode="contain" 
                 />
                 
-                {/* Thay thế Icon Scan bằng ảnh Local */}
                 <Image 
                     source={require('./assets/Card Icon (1).png')} 
                     style={{width: 24, height: 24}} 
@@ -388,44 +377,36 @@ function BottomTabs() {
         tabBarStyle: { height: 70, borderTopLeftRadius: 24, borderTopRightRadius: 24, position: 'absolute' },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          let iconColor = focused ? '#60A5FA' : '#C1C7D0'; // Xanh sáng khi active cho Home, xám khi inactive cho các tab khác
+          let iconColor = focused ? '#60A5FA' : '#C1C7D0'; 
 
           if (route.name === 'Home') iconName = 'home-outline';
           else if (route.name === 'Notif') iconName = 'notifications-outline';
           else if (route.name === 'History') iconName = 'time-outline';
           else if (route.name === 'Cart') {
-            // Logic cho tab Cart
             iconName = 'cart-outline';
-            iconColor = focused ? '#F28C5B' : '#C1C7D0'; // Màu cam khi active cho Cart, xám khi inactive
+            iconColor = focused ? '#F28C5B' : '#C1C7D0'; 
           }
           
-          // Logic nền tab
+          
           let backgroundColor = 'transparent';
-          if (route.name === 'Home' && focused) backgroundColor = '#E0F7FA'; // Nền xanh nhạt khi Home active
-          if (route.name === 'Cart' && focused) backgroundColor = '#FDF2E9'; // Nền cam nhạt khi Cart active
-          if (route.name === 'History' && focused) backgroundColor = '#E0F7FA'; // Nền cam nhạt khi Cart active
-          if (route.name === 'Notif' && focused) backgroundColor = '#E0F7FA'; // Nền cam nhạt khi Cart active
-          if (route.name === 'Scan' && focused) backgroundColor = '#E0F7FA'; // Nền cam nhạt khi Cart active
-
-
-
-
-          // Logic cho tab chính giữa (Scan)
+          if (route.name === 'Home' && focused) backgroundColor = '#E0F7FA'; 
+          if (route.name === 'Cart' && focused) backgroundColor = '#FDF2E9'; 
+          if (route.name === 'History' && focused) backgroundColor = '#E0F7FA'; 
+          if (route.name === 'Notif' && focused) backgroundColor = '#E0F7FA'; 
+          if (route.name === 'Scan' && focused) backgroundColor = '#E0F7FA'; 
           if (route.name === 'Scan') {
             return (
                <View style={styles.scanTabBtn}>
                  <Image 
                     source={require('./assets/Vector.png')} 
                     style={[
-                      { width: 28, height: 28 }, // THAY VÌ DÙNG STYLE CỦA BỐ, TA SET KÍCH THƯỚC CHUẨN CHO ẢNH
-                      { tintColor: focused ? '#60A5FA' : '#C1C7D0' } // CÓ DẤU PHẨY ĐÀNG HOÀNG NHÉ
+                      { width: 28, height: 28 },
+                      { tintColor: focused ? '#60A5FA' : '#C1C7D0' } 
                     ]} 
                  />
                </View>
             );
           }
-
-          // Trả về một View tùy chỉnh cho các tab khác để có bo góc và nền
           return (
              <View style={[styles.tabIconWrapper, { backgroundColor }]}>
                <Ionicons name={iconName} size={28} color={iconColor} />
@@ -500,11 +481,11 @@ const styles = StyleSheet.create({
   backBtn: { width: 45, height: 45, backgroundColor: '#FFF', borderRadius: 12, justifyContent: 'center', alignItems: 'center', marginTop: 10, marginBottom: 20, shadowColor: "#000", shadowOpacity: 0.05, shadowRadius: 5, elevation: 2 },
   checkoutHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 },
   checkoutTitle: { fontSize: 24, fontWeight: 'bold', color: '#333' },
-  amountText: { fontSize: 24, fontWeight: 'bold', color: '#34D399' }, // Xanh lá
+  amountText: { fontSize: 24, fontWeight: 'bold', color: '#34D399' }, 
   gstText: { fontSize: 12, color: '#A0A7B1', marginTop: 2 },
   tabContainer: { flexDirection: 'row', backgroundColor: '#FFF', borderRadius: 16, padding: 5, marginBottom: 25 },
   tabBtn: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingVertical: 12, borderRadius: 12 },
-  tabActive: { backgroundColor: '#34D399' }, // Nền xanh lá
+  tabActive: { backgroundColor: '#34D399' }, 
   tabActiveText: { color: 'white', fontWeight: 'bold', marginLeft: 8, fontSize: 16 },
   tabInactiveText: { color: '#333', fontWeight: 'bold', marginLeft: 8, fontSize: 16 },
   formContainer: { marginBottom: 10 },
@@ -517,7 +498,7 @@ const styles = StyleSheet.create({
   payButtonText: { color: 'white', fontSize: 18, fontWeight: 'bold', marginLeft: 10 },
 
   successContainer: { flex: 1, backgroundColor: '#FAFAFC', paddingHorizontal: 20 },
-  successContent: { flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: -50 }, // Đẩy lên 1 tí cho cân đối với nút Back
+  successContent: { flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: -50 }, 
   successImage: { width: 220, height: 220, marginBottom: 30 },
   successTitle: { fontSize: 22, fontWeight: 'bold', color: '#333', marginBottom: 15 },
   successDesc: { textAlign: 'center', color: '#A0A7B1', fontSize: 14, lineHeight: 22, paddingHorizontal: 20, marginBottom: 30 },
@@ -526,9 +507,8 @@ const styles = StyleSheet.create({
   downloadButton: { backgroundColor: '#5B66F9', height: 60, borderRadius: 16, justifyContent: 'center', alignItems: 'center', marginBottom: 40 },
   downloadButtonText: { color: 'white', fontSize: 18, fontWeight: 'bold' },
 
-  // ================= CSS MÀN HÌNH SCAN =================
   scanContainer: { flex: 1, backgroundColor: '#F8E9D2' }, 
-  bottleBackground: { position: 'absolute', width: '100%', height: '100%' }, // Phủ kín từ đỉnh xuống đáy
+  bottleBackground: { position: 'absolute', width: '100%', height: '100%' }, 
   
   backButtonSafeArea: { position: 'absolute', top: 50, left: 20, zIndex: 10 },
   backButton: { width: 44, height: 44, backgroundColor: 'white', borderRadius: 12, justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 5, elevation: 3 },
@@ -543,12 +523,12 @@ const styles = StyleSheet.create({
   bottomCardContainer: { position: 'absolute', bottom: 40, left: 20, right: 20 },
   bottomCard: { flexDirection: 'row', backgroundColor: 'white', borderRadius: 20, padding: 15, alignItems: 'center', justifyContent: 'space-between', shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 },
   cardInfo: { flexDirection: 'row', alignItems: 'center' },
-  cardImageWrapper: { backgroundColor: '#EFE1D1', padding: 5, borderRadius: 12, marginRight: 15 }, // Màu be lót dưới ảnh
+  cardImageWrapper: { backgroundColor: '#EFE1D1', padding: 5, borderRadius: 12, marginRight: 15 }, 
   cardImage: { width: 40, height: 40 },
   cardBrand: { fontSize: 13, color: '#A0A7B1', marginBottom: 2 },
   cardTitle: { fontSize: 18, fontWeight: 'bold', color: '#333' },
   addButton: { width: 45, height: 45, backgroundColor: '#60A5FA', borderRadius: 12, justifyContent: 'center', alignItems: 'center' }, // Nút vuông màu xanh
-  splashContainer: { flex: 1, backgroundColor: '#FEFAF6' }, // Nền hồng/cam nhạt
+  splashContainer: { flex: 1, backgroundColor: '#FEFAF6' }, 
   splashContent: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 30 },
   splashImage: { width: 300, height: 300, marginBottom: 40 },
   splashTitle: { fontSize: 24, fontWeight: 'bold', color: '#333', marginBottom: 20 },
@@ -558,7 +538,7 @@ const styles = StyleSheet.create({
   dotActive: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#60A5FA', marginHorizontal: 5 },
   exploreHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10, marginBottom: 15 },
   exploreTitle: { fontSize: 20, color: '#333', fontWeight: 'bold' },
-  exploreScroll: { overflow: 'visible' }, // Để kéo qua lại mượt
-  exploreCard: { width: 140, height: 180, borderRadius: 24, marginRight: 15, backgroundColor: '#E6E8EB' }, // Ảnh dummy
+  exploreScroll: { overflow: 'visible' }, 
+  exploreCard: { width: 140, height: 180, borderRadius: 24, marginRight: 15, backgroundColor: '#E6E8EB' }, 
   tabIconWrapper: { width: 45, height: 45, borderRadius: 14, justifyContent: 'center', alignItems: 'center' },
 });
